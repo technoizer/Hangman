@@ -16,7 +16,6 @@ import java.util.HashMap;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.util.Pair;
 
 /**
  *
@@ -29,7 +28,6 @@ public class threadServer extends Thread {
     private final ArrayList<threadClient> alThread;
     Scanner infile;
     public ArrayList<String> roomList = new ArrayList<>();
-    //private ArrayList<Pair <String,ArrayList>> wordBank = new ArrayList<>();
     private HashMap<String, ArrayList<String>> wordBank = new HashMap<>();
     private HashMap<String, String> currentWord = new HashMap<>();
     public threadSoal tS;

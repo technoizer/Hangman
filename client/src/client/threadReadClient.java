@@ -13,7 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
 /**
@@ -31,8 +31,10 @@ public class threadReadClient extends Thread {
     private JLabel scoring;
     private JLabel waktu;
     private JTextArea list;
+    private JTextArea top5;
+    
 
-    public threadReadClient(client parent, Socket sock, ObjectInputStream ois, JTextArea txtReceived, JComboBox room, JLabel scoring, JLabel waktu, JTextArea list) {
+    public threadReadClient(client parent, Socket sock, ObjectInputStream ois, JTextArea txtReceived, JComboBox room, JLabel scoring, JLabel waktu, JTextArea list, JTextArea top5) {
         this.sock = sock;
         this.ois = ois;
         this.txtReceived = txtReceived;
@@ -41,6 +43,7 @@ public class threadReadClient extends Thread {
         this.scoring = scoring;
         this.waktu = waktu;
         this.list = list;
+        this.top5 = top5;
     }
 
     @Override
@@ -51,6 +54,7 @@ public class threadReadClient extends Thread {
                 if (recv instanceof Message) {
                     Message msg = (Message) recv;
                     this.txtReceived.append(msg.getDari() + ": " + msg.getIsi() + "\n");
+                    this.txtReceived.setCaretPosition(txtReceived.getDocument().getLength());
                 } 
                 else if (recv instanceof command.CommandList) {
                     command.CommandList msg = (command.CommandList) recv;
@@ -74,6 +78,7 @@ public class threadReadClient extends Thread {
                     
                     if (msg.getCommand().equals("EXIST")){
                         parent.disconFrom();
+                        JOptionPane.showMessageDialog(null, "Username Sudah Terpakai");
                     }
                     
                     if(msg.getCommand().equals("SCORE")){
@@ -85,6 +90,15 @@ public class threadReadClient extends Thread {
                         this.list.setText("");
                         for(int i=0;i<msg.getCommandDetails().size();i++){
                             this.list.append(msg.getCommandDetails().get(i)+"\n");
+                        }
+                    }
+                    if(msg.getCommand().equals("TOP5")){
+                        this.top5.setText("");
+                        for(int i=0;i<msg.getCommandDetails().size();i++){
+                            this.top5.append(msg.getCommandDetails().get(i) + " ");
+                            if (i%2 == 1){
+                                this.top5.append("\n");
+                            }
                         }
                     }
                 }

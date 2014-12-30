@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package client;
+
 
 import command.Message;
 import java.io.BufferedInputStream;
@@ -29,10 +31,6 @@ import javax.swing.JOptionPane;
  * @author Muhammad Izzuddin
  */
 public class client extends javax.swing.JFrame {
-
-    /**
-     * Creates new form client
-     */
     private Socket server = null;
     private BufferedOutputStream bos = null;
     private BufferedInputStream bis = null;
@@ -58,7 +56,7 @@ public class client extends javax.swing.JFrame {
     public Timer baru;
     public boolean flag = false;
     /**
-     *
+     * Creates new form client
      */
     public client() {
         initComponents();
@@ -90,6 +88,18 @@ public class client extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        uname = new javax.swing.JTextField();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        listuser = new javax.swing.JTextArea();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        room = new javax.swing.JComboBox();
+        jLabel3 = new javax.swing.JLabel();
+        enterroom = new javax.swing.JButton();
+        servname = new javax.swing.JTextField();
+        scoring = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         connBtn = new javax.swing.JButton();
         img = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -98,23 +108,59 @@ public class client extends javax.swing.JFrame {
         sendText = new javax.swing.JTextField();
         guessText = new javax.swing.JTextField();
         guessBtn = new javax.swing.JButton();
-        words = new javax.swing.JLabel();
-        uname = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        room = new javax.swing.JComboBox();
-        jLabel3 = new javax.swing.JLabel();
-        enterroom = new javax.swing.JButton();
-        servname = new javax.swing.JTextField();
-        scoring = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         waktu = new javax.swing.JLabel();
+        words = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        listuser = new javax.swing.JTextArea();
-        jLabel6 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        top5 = new javax.swing.JTextArea();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        uname.setText("udin");
+        uname.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                unameActionPerformed(evt);
+            }
+        });
+
+        listuser.setEditable(false);
+        listuser.setColumns(1);
+        listuser.setRows(1);
+        listuser.setTabSize(1);
+        listuser.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        listuser.setMinimumSize(new java.awt.Dimension(0, 0));
+        jScrollPane3.setViewportView(listuser);
+
+        jLabel1.setText("Username");
+
+        jLabel2.setText("Server");
+
+        jLabel6.setText("TIME LEFT :");
+
+        room.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                roomActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Room");
+
+        enterroom.setText("Enter Room");
+        enterroom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enterroomActionPerformed(evt);
+            }
+        });
+
+        servname.setText("localhost");
+
+        scoring.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        scoring.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        scoring.setText("0");
+
+        jLabel4.setText("SCORE:");
 
         connBtn.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         connBtn.setText("Connect");
@@ -158,211 +204,162 @@ public class client extends javax.swing.JFrame {
             }
         });
 
+        waktu.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        waktu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        waktu.setText("0");
+
         words.setFont(new java.awt.Font("Tahoma", 0, 42)); // NOI18N
         words.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         words.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
         words.setEnabled(false);
 
-        uname.setText("udin");
-
-        jLabel1.setText("Username");
-
-        jLabel2.setText("Server");
-
-        room.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        room.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                roomActionPerformed(evt);
-            }
-        });
-
-        jLabel3.setText("Room");
-
-        enterroom.setText("Enter Room");
-        enterroom.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                enterroomActionPerformed(evt);
-            }
-        });
-
-        servname.setText("localhost");
-
-        scoring.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        scoring.setText("0");
-
-        jLabel4.setText("SCORE:");
-
-        waktu.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        waktu.setText("0");
-
         jLabel5.setText("List User");
 
-        listuser.setColumns(20);
-        listuser.setRows(3);
-        jScrollPane3.setViewportView(listuser);
+        top5.setEditable(false);
+        top5.setColumns(5);
+        top5.setRows(5);
+        jScrollPane2.setViewportView(top5);
 
-        jLabel6.setText("Time Left");
+        jLabel7.setText("TOP 5 PLAYER");
+
+        jLabel8.setText("Fun Chat Room");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(img, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(guessText, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(guessBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel7))
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(scoring, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
+                                        .addComponent(waktu, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(uname)
-                            .addComponent(servname, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(servname))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(connBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(img, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(guessText)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(guessBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(words, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(words, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(scoring, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel6)
-                            .addComponent(waktu))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(room, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(sendText)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(sendBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(enterroom)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(sendText)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(sendBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 52, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel3)
+                                .addComponent(room, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(enterroom, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(room, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(connBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel1)
-                                    .addComponent(uname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(servname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel2))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(room, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(connBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(uname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(servname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(words, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(enterroom))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(enterroom, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
+                        .addComponent(img)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(guessText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(guessBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(scoring, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(waktu)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1)
-                    .addComponent(img, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(guessText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(guessBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(sendText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(sendBtn))
-                .addGap(5, 5, 5))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(waktu)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel4)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(scoring, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(sendBtn)
+                            .addComponent(sendText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
         );
-
-        words.getAccessibleContext().setAccessibleName("words");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
-    private void setEnObject(boolean parameter){
-        room.setEnabled(parameter);
-        msgPool.setEnabled(parameter);
-        sendBtn.setEnabled(parameter);
-        sendText.setEnabled(parameter);
-        img.setEnabled(parameter);
-        guessBtn.setEnabled(parameter);
-        guessText.setEnabled(parameter);
-        enterroom.setEnabled(parameter);
-    }
-    
-    public void disconFrom(){
-        try{
-            command.CommandList baru = new command.CommandList();
-            baru.setCommand("END");
-            send(baru);
-            ois.close();
-            oos.close();
-            server.close();
-            isConnected = false;
-            setEnObject(false);
-            connBtn.setText("Connect");
-        }catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "Server sedang offline");
-        }
-    }
-    private void connTo(){
-        try {
-            server = new Socket(servname.getText(), 6060);
-            bos = new BufferedOutputStream(server.getOutputStream());
-            oos = new ObjectOutputStream(server.getOutputStream());
-            ois = new ObjectInputStream(server.getInputStream());
-            this.trdClient = new threadReadClient(this, server, ois, this.msgPool, this.room, this.scoring, this.waktu, this.listuser);
-            this.trdClient.start();
-            
-            
-            command.CommandList baru = new command.CommandList();
-            baru.setCommand("START");
-            ArrayList<String> detail = new ArrayList<>();
-            detail.add(uname.getText());
-            baru.setCommandDetails(detail);
-            send(baru);
-            isConnected = true;
-            setEnObject(true);
-            connBtn.setText("Disconnect");
-            
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "Server sedang offline");
-        }
-    }
-    
+
+    private void roomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roomActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_roomActionPerformed
+
+    private void enterroomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enterroomActionPerformed
+        // TODO add your handling code here:
+        command.CommandList baru = new command.CommandList();
+        baru.setCommand("RNAME");
+        ArrayList<String> detail = new ArrayList<>();
+        detail.add((String) room.getSelectedItem());
+        baru.setCommandDetails(detail);
+        send(baru);
+        flag = true;
+    }//GEN-LAST:event_enterroomActionPerformed
+
     private void connBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_connBtnActionPerformed
         if(isConnected){
             disconFrom();
@@ -374,6 +371,22 @@ public class client extends javax.swing.JFrame {
             //setEnObject(true);
         }
     }//GEN-LAST:event_connBtnActionPerformed
+
+    private void sendBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendBtnActionPerformed
+        Message pesan = new Message();
+        pesan.setIsi(sendText.getText());
+        pesan.setDari(uname.getText());
+        send(pesan);
+        this.sendText.setText("");
+    }//GEN-LAST:event_sendBtnActionPerformed
+
+    private void sendTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendTextActionPerformed
+        sendBtnActionPerformed(evt);
+    }//GEN-LAST:event_sendTextActionPerformed
+
+    private void guessTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guessTextActionPerformed
+        guessBtnActionPerformed(evt);
+    }//GEN-LAST:event_guessTextActionPerformed
 
     private void guessBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guessBtnActionPerformed
         guess = guessText.getText();
@@ -408,36 +421,9 @@ public class client extends javax.swing.JFrame {
         guessText.setText("");
     }//GEN-LAST:event_guessBtnActionPerformed
 
-    private void guessTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guessTextActionPerformed
-        guessBtnActionPerformed(evt);
-    }//GEN-LAST:event_guessTextActionPerformed
-
-    private void sendBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendBtnActionPerformed
-        Message pesan = new Message();
-        pesan.setIsi(sendText.getText());
-        pesan.setDari(uname.getText());
-        send(pesan);
-        this.sendText.setText("");
-    }//GEN-LAST:event_sendBtnActionPerformed
-
-    private void sendTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendTextActionPerformed
-        sendBtnActionPerformed(evt);
-    }//GEN-LAST:event_sendTextActionPerformed
-
-    private void roomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roomActionPerformed
+    private void unameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_roomActionPerformed
-
-    private void enterroomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enterroomActionPerformed
-        // TODO add your handling code here:
-        command.CommandList baru = new command.CommandList();
-        baru.setCommand("RNAME");
-        ArrayList<String> detail = new ArrayList<>();
-        detail.add((String) room.getSelectedItem());
-        baru.setCommandDetails(detail);
-        send(baru);
-        flag = true;
-    }//GEN-LAST:event_enterroomActionPerformed
+    }//GEN-LAST:event_unameActionPerformed
 
     /**
      * @param args the command line arguments
@@ -473,6 +459,70 @@ public class client extends javax.swing.JFrame {
             }
         });
     }
+    
+    public void disconFrom(){
+        try{
+            command.CommandList baru = new command.CommandList();
+            baru.setCommand("END");
+            send(baru);
+            ois.close();
+            oos.close();
+            server.close();
+            isConnected = false;
+            setEnObject(false);
+            connBtn.setText("Connect");
+        }catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Server sedang offline");
+        }
+    }
+    public void connTo(){
+        try {
+            server = new Socket(servname.getText(), 6060);
+            bos = new BufferedOutputStream(server.getOutputStream());
+            oos = new ObjectOutputStream(server.getOutputStream());
+            ois = new ObjectInputStream(server.getInputStream());
+            this.trdClient = new threadReadClient(this, server, ois, this.msgPool, this.room, this.scoring, this.waktu, this.listuser, this.top5);
+            this.trdClient.start();
+            
+            
+            command.CommandList baru = new command.CommandList();
+            baru.setCommand("START");
+            ArrayList<String> detail = new ArrayList<>();
+            detail.add(uname.getText());
+            baru.setCommandDetails(detail);
+            send(baru);
+            isConnected = true;
+            setEnObject(true);
+            connBtn.setText("Disconnect");
+            
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Server sedang offline");
+        }
+    }
+    public void send(Object Obj){
+        try {
+            oos.writeObject(Obj);
+            oos.flush();
+            oos.reset();
+        } catch (IOException ex) {
+            Logger.getLogger(client.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    private void setEnObject(boolean parameter){
+        room.setEnabled(parameter);
+        msgPool.setEnabled(parameter);
+        sendBtn.setEnabled(parameter);
+        sendText.setEnabled(parameter);
+        img.setEnabled(parameter);
+        guessBtn.setEnabled(parameter);
+        guessText.setEnabled(parameter);
+        enterroom.setEnabled(parameter);
+        listuser.setEnabled(parameter);
+    }
+    public String getCurrentWord() {
+        return currentWord;
+    }
+    
 // <editor-fold defaultstate="collapsed" desc="Fungsi Untuk Mencocokkan Huruf">
 
     public static void matchLetter(String secret, StringBuffer dashes, char letter, JLabel words) {
@@ -513,7 +563,6 @@ public class client extends javax.swing.JFrame {
         img.setIcon(new javax.swing.ImageIcon(getClass().getResource("/client/img/1.png")));
     }
 // </editor-fold>
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton connBtn;
     private javax.swing.JButton enterroom;
@@ -526,7 +575,10 @@ public class client extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextArea listuser;
     private javax.swing.JTextArea msgPool;
@@ -535,33 +587,17 @@ public class client extends javax.swing.JFrame {
     private javax.swing.JButton sendBtn;
     private javax.swing.JTextField sendText;
     private javax.swing.JTextField servname;
+    private javax.swing.JTextArea top5;
     private javax.swing.JTextField uname;
     private javax.swing.JLabel waktu;
     private javax.swing.JLabel words;
     // End of variables declaration//GEN-END:variables
 
     /**
-     * @return the currentWord
-     */
-    public String getCurrentWord() {
-        return currentWord;
-    }
-
-    /**
      * @param currentWord the currentWord to set
      */
     public void setCurrentWord(String currentWord) {
         this.currentWord = currentWord;
-    }
-    
-    public void send(Object Obj){
-        try {
-            oos.writeObject(Obj);
-            oos.flush();
-            oos.reset();
-        } catch (IOException ex) {
-            Logger.getLogger(client.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     /**

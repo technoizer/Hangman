@@ -17,6 +17,8 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.SocketAddress;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -33,8 +35,8 @@ public class threadClient implements Runnable {
     public ObjectOutputStream oos = null;
     private ObjectInputStream ois = null;
     private final SocketAddress sa;
-    private String username;
-    private String roomname = "";
+    public String username;
+    private String roomname = "KOSONG";
     private FileInputStream fis = null;
     private FileOutputStream fos = null;
     private ArrayList<String> Recipient = new ArrayList<>();
@@ -92,7 +94,6 @@ public class threadClient implements Runnable {
                                 baru.setCommand("ROOMLIST");
                                 baru.setCommandDetails(server.getRoomList());
                                 send(baru);
-                                
                             }
 
                             //sendWord();-- ke setelah 
@@ -114,6 +115,7 @@ public class threadClient implements Runnable {
                                 s.add(score+"");
                                 baru.setCommandDetails(s);
                                 send(baru);
+                                updateTop();
                             }
                         }
                         
@@ -124,6 +126,7 @@ public class threadClient implements Runnable {
                             System.out.println("set" + username + "room" + getRoomname());
                             sendWord();
                             server.updateUserList();
+                            updateTop();
                         }
                     }
                 } catch (IOException ex) {
@@ -182,7 +185,40 @@ public class threadClient implements Runnable {
         baru.setCommandDetails(detail);
         send(baru);
     }
-
+    
+    public void updateTop(){
+        List<Score> scores = new ArrayList<Score>();
+        for (int i=0;i<alThread.size();i++){
+            if (alThread.get(i).getRoomname() != "KOSONG")
+                scores.add(new Score(alThread.get(i).score,alThread.get(i).username));
+        }       
+        Collections.sort(scores);
+        CommandList baru = new CommandList();
+        baru.setCommand("TOP5");
+        ArrayList<String> top = new ArrayList<>();
+        if (scores.size()>= 5){
+            for (int i=0;i<5;i++){
+                top.add(Integer.toString(scores.get(i).score));
+                top.add(scores.get(i).name);
+            }
+        }
+        else{
+            for (int i=0;i<scores.size();i++){
+                top.add(Integer.toString(scores.get(i).score));
+                top.add(scores.get(i).name);
+            }
+        }
+            
+        baru.setCommandDetails(top);
+        for(int i=0;i<server.roomList.size();i++){
+            try {
+                sendMultiple(baru, server.roomList.get(i));
+            } catch (IOException ex) {
+                Logger.getLogger(threadClient.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+    }
     /**
      * @return the sockcli
      */
@@ -216,5 +252,20 @@ public class threadClient implements Runnable {
      */
     public void setRoomname(String roomname) {
         this.roomname = roomname;
+    }
+    
+    class Score implements Comparable<Score> {
+        int score;
+        String name;
+
+        public Score(int score, String name) {
+            this.score = score;
+            this.name = name;
+        }
+
+        @Override
+        public int compareTo(Score o) {
+            return score > o.score ? -1 : score < o.score ? 1 : 0;
+        }
     }
 }

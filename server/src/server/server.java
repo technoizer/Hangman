@@ -8,23 +8,20 @@ package server;
 
 import java.io.IOException;
 import java.net.ServerSocket;
-import java.net.Socket;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 /**
  *
  * @author Muhammad Izzuddin
  */
 public class server extends javax.swing.JFrame {
-
+    threadServer ts;
+    ServerSocket server;
     /**
      * Creates new form server
      */
-    threadServer ts;
-    ServerSocket server;
     public server() {
         initComponents();
     }

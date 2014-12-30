@@ -1,0 +1,13 @@
+adobe
+corel
+word
+excel
+photoshop
+netbean
+devc
+winamp
+chrome
+mozilla
+sublime
+unity
+visual studio

@@ -1024,7 +1024,7 @@ public class client extends javax.swing.JFrame {
         System.out.println(secret);
         dashes = makeDashes(secret);
         words.setText(dashes.toString());
-        setEnObject(true);
+        hurufEnable(true);
         if (bodyparts==0){
             hurufEnable(false);
             img.setIcon(new javax.swing.ImageIcon(getClass().getResource("/client/img/8.png")));

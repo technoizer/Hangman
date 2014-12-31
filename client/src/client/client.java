@@ -483,7 +483,7 @@ public class client extends javax.swing.JFrame {
             bos = new BufferedOutputStream(server.getOutputStream());
             oos = new ObjectOutputStream(server.getOutputStream());
             ois = new ObjectInputStream(server.getInputStream());
-            this.trdClient = new threadReadClient(this, server, ois, this.msgPool, this.room, this.scoring, this.waktu, this.listuser, this.top5);
+            this.trdClient = new threadReadClient(this, server, ois, this.msgPool, this.room, this.scoring, this.waktu, this.listuser, this.top5, this.uname, this.servname);
             this.trdClient.start();
             
             
@@ -496,8 +496,6 @@ public class client extends javax.swing.JFrame {
             isConnected = true;
             setEnObject(true);
             connBtn.setText("Disconnect");
-            uname.setEnabled(false);
-            servname.setEnabled(false);
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "Server sedang offline");
         }

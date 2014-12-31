@@ -15,6 +15,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 /**
  *
@@ -32,9 +33,11 @@ public class threadReadClient extends Thread {
     private JLabel waktu;
     private JTextArea list;
     private JTextArea top5;
+    private JTextField uname;
+    private JTextField servname;
     
 
-    public threadReadClient(client parent, Socket sock, ObjectInputStream ois, JTextArea txtReceived, JComboBox room, JLabel scoring, JLabel waktu, JTextArea list, JTextArea top5) {
+    public threadReadClient(client parent, Socket sock, ObjectInputStream ois, JTextArea txtReceived, JComboBox room, JLabel scoring, JLabel waktu, JTextArea list, JTextArea top5, JTextField uname, JTextField servname) {
         this.sock = sock;
         this.ois = ois;
         this.txtReceived = txtReceived;
@@ -44,6 +47,8 @@ public class threadReadClient extends Thread {
         this.waktu = waktu;
         this.list = list;
         this.top5 = top5;
+        this.servname = servname;
+        this.uname = uname;
     }
 
     @Override
@@ -78,6 +83,8 @@ public class threadReadClient extends Thread {
                     
                     if (msg.getCommand().equals("EXIST")){
                         parent.disconFrom();
+                        uname.setEnabled(true);
+                        servname.setEnabled(true);
                         JOptionPane.showMessageDialog(null, "Username Sudah Terpakai");
                     }
                     

@@ -355,6 +355,7 @@ public class client extends javax.swing.JFrame {
         baru.setCommand("RNAME");
         ArrayList<String> detail = new ArrayList<>();
         detail.add((String) room.getSelectedItem());
+        detail.add(Integer.toString(bodyparts));
         baru.setCommandDetails(detail);
         send(baru);
         flag = true;
@@ -514,6 +515,8 @@ public class client extends javax.swing.JFrame {
         top5.setEnabled(parameter);
         waktu.setText("0");
         scoring.setText("0");
+        top5.setText("");
+        msgPool.setText("");
         room.setEnabled(parameter);
         msgPool.setEnabled(parameter);
         sendBtn.setEnabled(parameter);
@@ -555,17 +558,17 @@ public class client extends javax.swing.JFrame {
 // </editor-fold>
 
 // <editor-fold defaultstate="collapsed" desc="Fungsi Untuk Memulai Game Baru"> 
-    public void StartGame() {
+    public void StartGame(int live) {
         secret = getCurrentWord();
         guesses = "";
         done = false;
-        bodyparts = MAXPARTS;
+        bodyparts = live;
         System.out.println(secret);
         dashes = makeDashes(secret);
         words.setText(dashes.toString());
         guessText.setEnabled(true);
         
-        img.setIcon(new javax.swing.ImageIcon(getClass().getResource("/client/img/1.png")));
+        img.setIcon(new javax.swing.ImageIcon(getClass().getResource("/client/img/" + (6 - bodyparts + 1) + ".png")));
     }
 // </editor-fold>
     // Variables declaration - do not modify//GEN-BEGIN:variables

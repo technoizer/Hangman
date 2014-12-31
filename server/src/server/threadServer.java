@@ -137,11 +137,7 @@ public class threadServer extends Thread {
             ArrayList<String> iya = new ArrayList<>();
             for(int j=0;j<alThread.size();j++){
                 if(alThread.get(j).getRoomname().equals(roomList.get(i))){
-                    synchronized (alThread.get(i).oos){
-                    synchronized (alThread.get(i).getSockcli()){
-                        iya.add(alThread.get(j).getUsername());
-                    }}
-                    
+                    iya.add(alThread.get(j).getUsername());
                 }
             }
             

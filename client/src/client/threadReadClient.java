@@ -66,7 +66,7 @@ public class threadReadClient extends Thread {
                         parent.setCount(Integer.parseInt(msg.getCommandDetails().get(1)));
                         System.out.println(msg.getCommandDetails().get(1));
                         this.waktu.setText(msg.getCommandDetails().get(1));
-                        parent.StartGame();
+                        parent.StartGame(Integer.parseInt(msg.getCommandDetails().get(2)));
                     }
                     if (msg.getCommand().equals("ROOMLIST")){
                         this.room.removeAllItems();

@@ -18,6 +18,7 @@ import java.net.Socket;
 import java.net.SocketAddress;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -43,12 +44,16 @@ public class threadClient implements Runnable {
     private threadServer server;
     public boolean flag = false;
     private int score;
+    public HashMap<String,Integer> liveAll = new HashMap<>();
     public threadClient(threadServer server, Socket sockcli, ArrayList<threadClient> t) {
         this.server = server;
         this.sockcli = sockcli;
         this.alThread = t;
         this.sa = this.sockcli.getRemoteSocketAddress();
         this.score = 0;
+        for(int i=0;i<server.roomList.size();i++){
+            liveAll.put(server.roomList.get(i), 6);
+        }
     }
 
     @Override
@@ -91,9 +96,7 @@ public class threadClient implements Runnable {
 
                             if (flagExist == false) {
                                 username = comm.getCommandDetails().get(0);
-                                baru.setCommand("ROOMLIST");
-                                baru.setCommandDetails(server.getRoomList());
-                                send(baru);
+                                sendRoomList(baru);
                             }
 
                             //sendWord();-- ke setelah 
@@ -122,11 +125,15 @@ public class threadClient implements Runnable {
                         else if(msg.equals("RNAME")){
                             String oldroomname = getRoomname();
                             if (oldroomname == "") oldroomname = "KOSONG";
+                            else{
+                                liveAll.put(oldroomname, Integer.parseInt(comm.getCommandDetails().get(1)));
+                            }
                             setRoomname(comm.getCommandDetails().get(0));
                             System.out.println("set" + username + "room" + getRoomname());
                             sendWord();
                             server.updateUserList();
                             updateTop();
+                            //sendRoomList(baru);
                         }
                     }
                 } catch (IOException ex) {
@@ -182,8 +189,10 @@ public class threadClient implements Runnable {
         ArrayList<String> detail = new ArrayList<>();
         detail.add(server.getCurrentWord(getRoomname()));
         detail.add((Integer.toString(server.tS.countAll.get(roomname))));
+        detail.add(Integer.toString(this.liveAll.get(roomname)));
         baru.setCommandDetails(detail);
         send(baru);
+        liveAll.put(roomname,6);
     }
     
     public void updateTop(){
@@ -252,6 +261,19 @@ public class threadClient implements Runnable {
      */
     public void setRoomname(String roomname) {
         this.roomname = roomname;
+    }
+    
+    public void sendRoomList(CommandList baru){
+        baru.setCommand("ROOMLIST");
+        ArrayList<String> iya = new ArrayList<>();
+        for (int i=0; i<server.getRoomList().size();i++)
+        {
+            if (server.getRoomList().get(i) != getRoomname()){
+                iya.add(server.getRoomList().get(i));
+            }
+        }
+        baru.setCommandDetails(iya);
+        send(baru);
     }
     
     class Score implements Comparable<Score> {

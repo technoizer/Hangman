@@ -358,6 +358,7 @@ public class client extends javax.swing.JFrame {
         baru.setCommandDetails(detail);
         send(baru);
         flag = true;
+        msgPool.setText("");
     }//GEN-LAST:event_enterroomActionPerformed
 
     private void connBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_connBtnActionPerformed
@@ -494,7 +495,8 @@ public class client extends javax.swing.JFrame {
             isConnected = true;
             setEnObject(true);
             connBtn.setText("Disconnect");
-            
+            uname.setEnabled(false);
+            servname.setEnabled(false);
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "Server sedang offline");
         }
@@ -509,6 +511,9 @@ public class client extends javax.swing.JFrame {
         }
     }
     private void setEnObject(boolean parameter){
+        top5.setEnabled(parameter);
+        waktu.setText("0");
+        scoring.setText("0");
         room.setEnabled(parameter);
         msgPool.setEnabled(parameter);
         sendBtn.setEnabled(parameter);
